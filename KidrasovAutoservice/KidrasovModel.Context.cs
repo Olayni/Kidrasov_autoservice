@@ -18,6 +18,7 @@ namespace KidrasovAutoservice
 
         private static Kidrasov_autoserviceEntities _context;
 
+
         public static Kidrasov_autoserviceEntities GetContext()
         {
             if (_context == null)

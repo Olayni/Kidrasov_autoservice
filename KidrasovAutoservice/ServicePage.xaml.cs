@@ -105,7 +105,25 @@ namespace KidrasovAutoservice
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEdirPage());
+            Manager.MainFrame.Navigate(new AddEdirPage(null));
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddEdirPage(null));
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddEdirPage((sender as Button).DataContext as Service));
+        }
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Kidrasov_autoserviceEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                ServiceListView.ItemsSource = Kidrasov_autoserviceEntities.GetContext().Service.ToList();
+            }
         }
     }
 }
