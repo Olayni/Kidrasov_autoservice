@@ -37,10 +37,13 @@ namespace KidrasovAutoservice
                 errors.AppendLine("Укажите название услуги");
             if (_currentServise.Cost == 0)
                 errors.AppendLine("Укажите стоимость услуги");
+            if (string.IsNullOrWhiteSpace(Convert.ToString(_currentServise.Discount)))
+                errors.AppendLine("Укажите скидку");
             if (_currentServise.Discount < 0 || _currentServise.Discount > 100)
                 errors.AppendLine("Укажите корректную скидку");
             if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))
                 errors.AppendLine("Укажите длительность услуги");
+
 
             if (errors.Length > 0)
             {
@@ -52,7 +55,7 @@ namespace KidrasovAutoservice
             try
             {
                 Kidrasov_autoserviceEntities.GetContext().SaveChanges();
-                MessageBox.Show("информация сохранена");
+                MessageBox.Show("Информация сохранена");
                 Manager.MainFrame.GoBack();
             }
             catch (Exception ex)
